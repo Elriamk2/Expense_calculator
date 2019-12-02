@@ -10,6 +10,11 @@ Create expenses calculator
 
 # calculate the tax region and call the appropriate
 def select_tax_region(input):
+    try:
+        i = int(input)
+    except ValueError:
+        print ("Please enter either 1 or 2, your tax region was not recognised, so is calculated as a non scottish region")
+
     if input == "1":
         print("selected UK, scotland")
         yearly_wages_scot(gross_pay)
@@ -17,70 +22,90 @@ def select_tax_region(input):
         print("selected UK, outside scotland")
         yearly_wages_uk_other(gross_pay)
     else:
-        print("your tax region was not recognised")
         yearly_wages(gross_pay)
 
 # define the take home wages
+## N.B. still having a calculation issue on the higher end taxes being grossly out, need to debug why, issue appears to be with the higher and top rates
 
 def yearly_wages_uk_other(wages):
     """This calulates your wages based on you living in the UK and outside of Scotland """    
+    try:
+        i = int(wages)
+    except:
+        print("You must enter your salary")
+
     print("calculating UK other than scottish taxes") 
     national_insurance_rate = (wages - 8632) * 12 / 100
+    tax_bands = [8632, 12500, 50000]
+
     if wages == "":
-            print("You must enter a salary")
-    elif wages < 8632:
+        after_tax_salary = 0
+    elif wages < tax_bands[0]:
         after_tax_salary = wages
-    elif (wages < 12500):        
+    elif wages < tax_bands[1]:        
         after_tax_salary = wages - national_insurance_rate
-    elif wages < 50000:
-        basic_rate = (wages - 12500) * 20 / 100
+    elif wages < tax_bands[2]:
+        basic_rate = (wages - tax_bands[1]) * 20 / 100
         after_tax_salary = wages - basic_rate - national_insurance_rate
     elif wages >= 50000:
-        higher_rate = ((wages - 12500) * 20 / 100) + ((wages - 50000) * 40 /100)
+        higher_rate = ((wages - tax_bands[1]) * 20 / 100) + ((wages - tax_bands[2]) * 40 /100)
         after_tax_salary = wages - higher_rate - national_insurance_rate   
-    weekly_wages = round((after_tax_salary / 52))
+    weekly_wages = round((after_tax_salary / 52.090714))
     return weekly_wages
   
 def yearly_wages_scot(wages):
-    """This calulates your wages based on you living in Scotland """  
+    """This calculates your wages based on you living in Scotland """  
+    try:
+        i = int(wages)
+    except:
+        print("You must enter your salary")
+
     national_insurance_rate = (wages - 8632) * 12 / 100
+    scottish_tax_bands = [8632, 12500, 14549, 24944, 43430, 150000]
+
+    starter_rate = ((wages - scottish_tax_bands[1]) * 19) / 100
+    basic_rate = ((wages - scottish_tax_bands[2]) * 20) / 100
+    intermediate_rate = ((wages - scottish_tax_bands[3]) * 21) /100
+    higher_rate = ((wages - scottish_tax_bands[4]) * 41) / 100
+    top_rate = ((wages - scottish_tax_bands[5]) * 46) / 100
+
+    if wages > 100000 and wages < 150000:
+        reduction = wages - 100000
+        sacrifice = reduction / 2
+        starter_rate = wages - sacrifice
+        print("over 100k sacrifice calculation", wages)
+
     if wages == "":
-            print("You must enter a salary")
-    elif wages <= 8632: 
+            print("You must enter your salary")
+
+    elif wages <= scottish_tax_bands[0]: 
         after_tax_salary = wages
-    elif (wages < 12500): # only pay NI       
+
+    elif wages <= scottish_tax_bands[1]: # only pay NI       
         after_tax_salary = wages - national_insurance_rate
-    elif (wages <= 14550): # only pay starter rate
-        starter_rate = (wages - 12500) * 19 / 100
-        after_tax_salary = wages - starter_rate - national_insurance_rate
-    elif wages < 24944:
-        starter_rate = (wages - 12500) * 19 / 100
-        basic_rate = (wages - 14549) * 20 / 100
-        after_tax_salary = wages - starter_rate - basic_rate - national_insurance_rate
-    elif wages <= 43430:
-        starter_rate = (wages - 12500) * 19 / 100
-        basic_rate = (wages - 14549) * 20 / 100
-        intermediate_rate = (wages - 24944) * 21 /100
-        after_tax_salary = wages - starter_rate - basic_rate - intermediate_rate - national_insurance_rate
-    elif wages <= 150000:
-        starter_rate = (wages - 12500) * 19 / 100
-        basic_rate = (wages - 14549) * 20 / 100
-        intermediate_rate = (wages - 24944) * 21 /100
-        higher_rate = (wages - 43431) * 41 / 100
-        after_tax_salary = wages - starter_rate - basic_rate - intermediate_rate - higher_rate - national_insurance_rate
-    elif wages > 150000:
-        starter_rate = (wages - 12500) * 19 / 100
-        basic_rate = (wages - 14549) * 20 / 100
-        intermediate_rate = (wages - 24944) * 21 /100
-        higher_rate = (wages - 43431) * 41 / 100
-        top_rate = (wages - 150000) * 46 / 100
-        after_tax_salary = wages - starter_rate - basic_rate - intermediate_rate - higher_rate - top_rate - national_insurance_rate
-    weekly_wages = round((after_tax_salary / 52))
+
+    elif wages <= scottish_tax_bands[2]: # only pay starter rate
+        after_tax_salary = wages - (starter_rate + national_insurance_rate)
+
+    elif wages <= scottish_tax_bands[3]:
+        after_tax_salary = wages - (starter_rate + basic_rate + national_insurance_rate)
+
+    elif wages <= scottish_tax_bands[4]:
+        after_tax_salary = wages - (starter_rate + basic_rate + intermediate_rate + national_insurance_rate)
+
+    elif wages <= scottish_tax_bands[5]:
+       after_tax_salary = wages - (starter_rate + basic_rate + intermediate_rate + higher_rate + national_insurance_rate)
+
+    elif wages > scottish_tax_bands[5]:        
+        after_tax_salary = wages - (basic_rate + intermediate_rate + higher_rate + top_rate + national_insurance_rate)
+
+    weekly_wages = round((after_tax_salary / 52.090714))
+    #print(after_tax_salary)
     #print("Scottish weekly wages ", weekly_wages)
     return weekly_wages
     
 def yearly_wages(wages):
-    """This calulates with the default outside of scotland tax bands """     
+    """This calculates with the default outside of scotland tax bands """     
     if wages == "":
             print("You must enter a salary")
     elif wages < 8632:
@@ -96,7 +121,7 @@ def yearly_wages(wages):
         higher_rate = ((wages - 12500) * 20 / 100) + ((wages - 50000) * 40 /100)
         national_insurance_rate = (wages - 8632) * 12 / 100
         after_tax_salary = wages - higher_rate - national_insurance_rate   
-    weekly_wages = round((after_tax_salary / 52))
+    weekly_wages = round((after_tax_salary / 52.090714))
     return weekly_wages
 
 def test_wages_uk_other():
@@ -168,25 +193,25 @@ def council_tax_band(council_tax_band):
         print("You are not currently paying council tax")
         weekly_council_tax = 0
     elif council_tax_calc == "A*":
-        weekly_council_tax = 932.26 / 52
+        weekly_council_tax = 932.26 / 52.090714
     elif council_tax_calc == "A":
-        weekly_council_tax = 1118.71 / 52
+        weekly_council_tax = 1118.71 / 52.090714
     elif council_tax_calc == "B":
-        weekly_council_tax = 1305.17 / 52
+        weekly_council_tax = 1305.17 / 52.090714
     elif council_tax_calc == "C":
-        weekly_council_tax = 1491.62 / 52
+        weekly_council_tax = 1491.62 / 52.090714
     elif council_tax_calc == "D":
-        weekly_council_tax = 1678.07 / 52
+        weekly_council_tax = 1678.07 / 52.090714
     elif council_tax_calc == "E":
-        weekly_council_tax = 2164.08 / 52 
+        weekly_council_tax = 2164.08 / 52.090714 
     elif council_tax_calc == "F":
-        weekly_council_tax = 2646.65 / 52
+        weekly_council_tax = 2646.65 / 52.090714
     elif council_tax_calc == "G":
-        weekly_council_tax = 3,156.65 / 52
+        weekly_council_tax = 3,156.65 / 52.090714
     else:
-        weekly_council_tax = 3911.36 / 52
-    return int(weekly_council_tax)
-    print("Your weekly council tax payments at band", council_tax_calc, " are", round(weekly_council_tax_payments, 2))
+        weekly_council_tax = 3911.36 / 52.090714
+    return float(weekly_council_tax)
+    print("Your weekly council tax payments at band", council_tax_calc, " are", round(weekly_council_tax, 2))
 
 def monthly_electricity_bill(monthly_electric_bill):
     """Calculates the weekly costs of your electric bills based in £ based on a 4.45 week cycle"""
@@ -259,13 +284,13 @@ monthly_telephony_bill(weekly_telephony)
 # calculate the weekly outgoings
 weekly_take_home = weekly_income - weekly_car_payments - weekly_council_payments - weekly_housing_costs - weekly_electric_bill - weekly_telephony # - weekly_gas_bill
 monthly_take_home = weekly_take_home * 4
-yearly_take_home = weekly_take_home * 52
+yearly_take_home = weekly_take_home * 52.090714
 
 # print all outputs
 print("=====")
 print("The weekly telephony payments are", round(weekly_telephony, 2))
 print("your weekly income is:", weekly_income)
-print("Weekly take home pay with taxes and National Insurance is roughly:", round(weekly_take_home, 2))
+print("Weekly take home pay after taxes and National Insurance is roughly:", round(weekly_take_home, 2))
 print("Monthly earnings after tax and expenses is roughly", round(monthly_take_home, 2))
 print("Yearly earnings after tax and expenses is roughly", round(yearly_take_home, 2))
 print("The difference in current earning is:", round(yearly_take_home - 21105.84, 2))
