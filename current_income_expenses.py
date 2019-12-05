@@ -275,7 +275,9 @@ def monthly_telephony_bill(telephony):
         print("You have entered an invalid figure")
     return telephony_bill    
         
-#current_gross_pay = (30401)
+# Basis for differential wage calculation
+current_wages = (int(input("What is your current salary? :")))
+
 while True:
     try:
         gross_pay = (int(input("Enter the wage you wish to calculate: ")))
@@ -287,10 +289,13 @@ while True:
 select_tax_region = (input("If you live in Scotland press 1, if you live in the rest of the UK press 2: "))
 if select_tax_region == '1':
     weekly_income = yearly_wages_scot(gross_pay)
+    current_weekly_income = yearly_wages_scot(current_wages)
 elif select_tax_region == '2':
     weekly_income = yearly_wages_uk_other(gross_pay)
+    current_weekly_income = yearly_wages_uk_other(current_wages)
 else:
     weekly_income = yearly_wages_uk_other(gross_pay)
+    current_weekly_income = yearly_wages_uk_other(current_wages)
 
 #test_wages_scot()
 
@@ -327,6 +332,7 @@ monthly_telephony_bill(weekly_telephony)
 weekly_take_home = weekly_income - weekly_car_payments - weekly_council_payments - weekly_housing_costs - weekly_electric_bill - weekly_telephony # - weekly_gas_bill
 monthly_take_home = weekly_take_home * 4.35
 yearly_take_home = weekly_take_home * 52.1
+current_yearly_take_home = current_weekly_income * 52.1
 
 # print all outputs
 print("=====")
@@ -335,7 +341,7 @@ print("your weekly income is:", weekly_income)
 print("Weekly take home pay after taxes and National Insurance is roughly:", round(weekly_take_home, 2))
 print("Monthly earnings after tax and expenses is roughly", round(monthly_take_home, 2))
 print("Yearly earnings after tax and expenses is roughly", round(yearly_take_home, 2))
-print("The difference in current earning is:", round(yearly_take_home - 21105.84, 2))
+print("The difference in current earning is:", round(yearly_take_home - current_yearly_take_home, 2))
 print("=====")
 
 
