@@ -161,27 +161,8 @@ def yearly_wages(wages):
     weekly_wages = round((after_tax_salary / 52.090714))
     return weekly_wages
 
-def test_wages_uk_other():
-    """tests the calculations are correct based off of HMRC with no pension contributions selected with the most common tax code based in Scotland"""
-    assert round(yearly_wages_uk_other(10000)) == 189
-    assert round(yearly_wages_uk_other(12500)) == 231
-    assert round(yearly_wages_uk_other(14550)) == 258
-    assert round(yearly_wages_uk_other(24945)) == 394
-#    assert yearly_wages_uk_other(43431) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
-#    assert yearly_wages_uk_other(150001) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
-
-# testing values against Scottish tax bands, needs to be rounded and figure out why there is a slight difference in the results
-def test_wages_scot():
-    """tests the calculations are correct based off of HMRC with no pension contributions selected with the most common tax code based in Scotland"""
-    assert round(yearly_wages_scot(10000)) == 189
-    assert round(yearly_wages_scot(12500)) == 231
-    assert round(yearly_wages_scot(14550)) == 258
-    assert round(yearly_wages_scot(24945)) == 394
-#    assert round(yearly_wages_scot(43431)) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
-#    assert round(yearly_wages_scot(150001)) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
-
 # Travel Expenses
-def car_travel_per_trip(distance):
+def car_travel_per_trip(distance = 0):
     """Calculates the cost of travel based on a 45p / mile Millage allowance"""
     # take the distance input and multiply that by 45p
     car_allowance = (distance * 45)
@@ -193,9 +174,8 @@ def car_travel_per_trip(distance):
         weekly_car_allowance = 0
     return weekly_car_allowance
 
-def train_ticket_return(train_ticket_return):
-    """Calculates the weekly costs of a train ticket """       
-    global weekly_train_allowance
+def train_ticket_return(train_ticket_return = 0):
+    """Calculates the weekly costs of a train ticket """
     if train_ticket_return == "":
         print("You have no train expenses")
         weekly_train_allowance = 0
@@ -203,24 +183,27 @@ def train_ticket_return(train_ticket_return):
         print("You have no train expenses")
         weekly_train_allowance = 0
     elif train_ticket_return > 0:
-        weekly_train_allowance = (train_ticket_return * 5)
+        weekly_train_allowance = (train_ticket_return * train_trips_per_week)
         print("Your weekly train ticket costs are:", weekly_train_allowance)
     else:
         print("You have no train expenses")
         weekly_train_allowance = 0
+        calculations_list[5] = train_ticket_return
+    return weekly_train_allowance
 
 # Housing costs
-def housing_payments(housing_payments):
-    """Calculates the weekly and yearly monthly payments based on the monthly costs"""
-    global weekly_housing_costs
+def housing_payments(housing_payments = 0):
+    """Calculates the weekly and yearly monthly payments based on the monthly costs""" 
     if housing_payments > 0:
         weekly_housing_costs = (housing_payments / 4)
         print("Your weekly housing costs are", weekly_housing_costs)
     else:
         print("You have no mortgage expenses")
         weekly_housing_costs = 0
+    calculations_list[7] = housing_payments
+    return weekly_housing_costs
 
-def council_tax_band(council_tax_band):
+def council_tax_band(council_tax_band = 0):
     council_tax_calc = council_tax_band.upper()
     """Calculates your council tax based on the  """
     if council_tax_calc == "":
@@ -247,23 +230,25 @@ def council_tax_band(council_tax_band):
         weekly_council_tax = 3,156.65 / 52.090714
     else:
         weekly_council_tax = 3911.36 / 52.090714
+    calculations_list[6] = council_tax_band
     return float(weekly_council_tax)
     print("Your weekly council tax payments at band", council_tax_calc, " are", round(weekly_council_tax, 2))
 
-def monthly_electricity_bill(monthly_electric_bill):
+def monthly_electricity_bill(electric_bill = 0):
     """Calculates the weekly costs of your electric bills based in £ based on a 4.45 week cycle"""
-    if monthly_electric_bill == 0:
+    if electric_bill == 0:
         weekly_electric_bill = 0
         print("You have no electic bills calculated")
-    elif monthly_electric_bill > 0:
-        weekly_electric_bill = monthly_electric_bill / 4.45
+    elif electric_bill > 0:
+        weekly_electric_bill = electric_bill / 4.45
         print("Your weekly electric bill is:", weekly_electric_bill)
     else:
-        weekly_electric_bill = 0
+        electric_bill = 0
         print("You have entered an invalid figure")
+    calculations_list[8] = electric_bill
     return weekly_electric_bill
 
-def monthly_telephony_bill(telephony):
+def monthly_telephony_bill(telephony = 0):
     """Calculates the costs of you telephone bills in £ based on a 4.45 week cycle"""
     if telephony == 0:
         telephony_bill = 0
@@ -273,14 +258,41 @@ def monthly_telephony_bill(telephony):
     else:
         telephony_bill = 0
         print("You have entered an invalid figure")
+    calculations_list[9] = telephony
     return telephony_bill    
-        
+
+# Tests to be completed
+def test_wages_uk_other():
+    """tests the calculations are correct based off of HMRC with no pension contributions selected with the most common tax code based in Scotland"""
+    assert round(yearly_wages_uk_other(10000)) == 189
+    assert round(yearly_wages_uk_other(12500)) == 231
+    assert round(yearly_wages_uk_other(14550)) == 258
+    assert round(yearly_wages_uk_other(24945)) == 394
+#    assert yearly_wages_uk_other(43431) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
+#    assert yearly_wages_uk_other(150001) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
+
+# testing values against Scottish tax bands, needs to be rounded and figure out why there is a slight difference in the results
+def test_wages_scot():
+    """tests the calculations are correct based off of HMRC with no pension contributions selected with the most common tax code based in Scotland"""
+    assert round(yearly_wages_scot(10000)) == 189
+    assert round(yearly_wages_scot(12500)) == 231
+    assert round(yearly_wages_scot(14550)) == 258
+    assert round(yearly_wages_scot(24945)) == 394
+#    assert round(yearly_wages_scot(43431)) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
+#    assert round(yearly_wages_scot(150001)) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
+
+# value storage list?
+# current_wages gross_pay, select_tax_region, car_distance, car_trips, train_ticket_return, train_trips_per_week, council_tax_assesment, housing_payments, monthly_telephony_bill
+calculations_list = [0,0,0,0,0,0,0,0,0,0]
+
 # Basis for differential wage calculation
-current_wages = (int(input("What is your current salary? :")))
+current_wages = (float(input("What is your current salary? :")))
+calculations_list[0] = current_wages
 
 while True:
     try:
-        gross_pay = (int(input("Enter the wage you wish to calculate: ")))
+        gross_pay = (float(input("Enter the wage you wish to calculate: ")))
+        calculations_list[1] = gross_pay
         break
     except:
         print("You must enter your salary as a numeric value")
@@ -300,36 +312,46 @@ else:
 #test_wages_scot()
 
 # define the travel to work / secondary location costs
-car_distance = (int(input("What is the return trip distance? If you are not using a car enter 0: ")))
-car_trips = (int(input("How many trips do you make? If you are not using a car enter 0: ")))
+car_distance = (float(input("What is the return trip distance? If you are not using a car enter 0: ")))
+car_trips = (float(input("How many trips do you make? If you are not using a car enter 0: ")))
 calculate_car_travel = car_distance * car_trips
+calculations_list[2] = car_distance
+calculations_list[3] = car_trips
 
 weekly_car_payments = car_travel_per_trip(calculate_car_travel)
 
 # define the train travel costs
 # train_ticket_return(4.70)
-train_ticket_return(float(input("How much does your ticket cost? Enter 0 if not using a train: ")))
-#current_train_ticket_return(0)
+train_trips_per_week = float(input("How many return train trips do you take per week? Enter 0 if not using a train: "))
+train_ticket_return(float(input("How much does your train ticket cost? Enter 0 if not using a train: ")))
+calculations_list[4] =  train_trips_per_week
+#calculations_list[5] = train_ticket_return(train_ticket_return)
+
 
 # Calculate housing costs, council tax band should be entered as a string
 # council_tax_band("b")
 council_tax_assesment = input("What council tax band is your house? Enter 0 if you are not paying council tax: ")
-weekly_council_payments = int(council_tax_band(council_tax_assesment))
+weekly_council_payments = float(council_tax_band(council_tax_assesment))
+#calculations_list[6] = council_tax_assesment(council_tax_assesment)
+
 # housing_payments(156)
-housing_payments(int(input("How much is your mortgage or rent? Enter 0 if you are not paying these: ")))
+weekly_housing_costs = housing_payments(float(input("How much is your mortgage or rent? Enter 0 if you are not paying these: ")))
+# calculations_list[7] = housing_payments(housing_payments)
 
 # monthly_electricity_bill(55)
-weekly_electric_bill = monthly_electricity_bill(int(input("How much will you be paying per month for electricity? If no electic bill enter 0: ")))
-#current_monthly_electricity_bill(699)
+weekly_electric_bill = monthly_electricity_bill(float(input("How much will you be paying per month for electricity? If no electic bill enter 0: ")))
+#calculations_list[8] = monthly_electricity_bill
 
 # monthly_broadband = 32.99
-weekly_telephony = int(input("How much will you pay for telephony services monthly? If you are not paying for these enter 0: "))
+weekly_telephony = float(input("How much will you pay for telephony services monthly? If you are not paying for these enter 0: "))
 monthly_telephony_bill(weekly_telephony)
+# calculations_list[9] = weekly_telephony(weekly_telephony)
 
-
+#additional income streams
+additional_monthly_income = float(input("Enter any additional monthly income, if none, enter 0: "))
 
 # calculate the weekly outgoings
-weekly_take_home = weekly_income - weekly_car_payments - weekly_council_payments - weekly_housing_costs - weekly_electric_bill - weekly_telephony # - weekly_gas_bill
+weekly_take_home = weekly_income - weekly_car_payments - weekly_council_payments - weekly_housing_costs - weekly_electric_bill - weekly_telephony + (additional_monthly_income / 4.35) # - weekly_gas_bill
 monthly_take_home = weekly_take_home * 4.35
 yearly_take_home = weekly_take_home * 52.1
 current_yearly_take_home = current_weekly_income * 52.1
@@ -344,4 +366,26 @@ print("Yearly earnings after tax and expenses is roughly", round(yearly_take_hom
 print("The difference in current earning is:", round(yearly_take_home - current_yearly_take_home, 2))
 print("=====")
 
+print(calculations_list)
 
+# figure out how to output to a CSV
+
+calculatations_out = str(calculations_list)
+telephony_out = "The weekly telephony payments are" + str(round(weekly_telephony, 2))
+income_out = "your weekly income is:" + str( weekly_income)
+take_home_out = "Weekly take home pay after taxes and National Insurance is roughly:" + str(round(weekly_take_home, 2))
+monthly_earnings_out = "Monthly earnings after tax and expenses is roughly" + str(round(monthly_take_home, 2))
+yearly_earnings_out = "Yearly earnings after tax and expenses is roughly" + str(round(yearly_take_home, 2))
+difference_out = "The difference in current earning is:" + str( round(yearly_take_home - current_yearly_take_home, 2))
+
+file = open("test_expenses_out.txt", "a")
+file.write("Inputs were:")
+file.write(calculatations_out)
+file.write("=====")
+file.write(telephony_out)
+file.write(income_out)
+file.write(take_home_out)
+file.write(monthly_earnings_out)
+file.write(yearly_earnings_out)
+file.write(difference_out)
+file.write("=====")
