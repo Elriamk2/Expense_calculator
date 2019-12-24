@@ -11,7 +11,9 @@ This is the test file for the travel espenses algorythm. This tests the
 following functions
 '''
 
-from current_income_expenses import *
+#from current_income_expenses import *
+from calculate_expenses import * # car_travel_per_trip
+# from expense_calc_inputs import *
 
 # Test Car 
 test_nil = 0
@@ -35,37 +37,25 @@ train_trips_weekly = 1
 train_trips_daily = 5
 
 # Train assertions
-train_nil_no = train_fare_nil * train_no_trips
-train_low_no = train_fare_low * train_no_trips
-train_medium_no = train_fare_medium * train_no_trips
-train_high_no = train_fare_high * train_no_trips
 
-assert train_ticket_return(train_nil_no) == 0
-assert train_ticket_return(train_low_no) == 0
-assert train_ticket_return(train_medium_no) == 0
-assert train_ticket_return(train_high_no) == 0
+assert train_ticket_return(train_fare_nil, train_no_trips) == 0
+assert train_ticket_return(train_fare_low, train_no_trips) == 0
+assert train_ticket_return(train_fare_medium, train_no_trips) == 0
+assert train_ticket_return(train_fare_high, train_no_trips) == 0
 
 #train Assert daily tests
-train_nil_daily = train_fare_nil * train_trips_daily
-train_low_daily = train_fare_low * train_trips_daily
-train_medium_daily = train_fare_medium * train_trips_daily
-train_high_daily = train_fare_high * train_trips_daily
 
-assert train_ticket_return(train_nil_daily) == 0
-assert train_ticket_return(train_low_daily) == 23.75
-assert train_ticket_return(train_medium_daily) == 50
-assert train_ticket_return(train_high_daily) == 528.75
+assert train_ticket_return(train_fare_nil, train_trips_daily) == 0
+assert train_ticket_return(train_fare_low, train_trips_daily) == 23.75
+assert train_ticket_return(train_fare_medium, train_trips_daily) == 50
+assert train_ticket_return(train_fare_high, train_trips_daily) == 526.25
 
 #Train Assert weekly tests
-train_nil_weekly = train_fare_nil * train_trips_weekly 
-train_low_weekly = train_fare_low * train_trips_weekly 
-train_medium_weekly = train_fare_medium * train_trips_weekly 
-train_high_weeekly = train_fare_high * train_trips_weekly 
 
-assert train_ticket_return(train_nil_weekly) == 0
-assert train_ticket_return(train_low_weekly) == 4.75
-assert train_ticket_return(train_medium_weekly) == 10
-assert train_ticket_return(train_high_weeekly) == 105.75
+assert train_ticket_return(train_fare_nil, train_trips_weekly) == 0
+assert train_ticket_return(train_fare_low, train_trips_weekly ) == 4.75
+assert train_ticket_return(train_fare_medium, train_trips_weekly) == 10
+assert train_ticket_return(train_fare_high, train_trips_weekly) == 105.25
 
 # Test Bus
 bus_fare_nil = 0
