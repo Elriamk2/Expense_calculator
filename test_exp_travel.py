@@ -1,18 +1,16 @@
-# Test Expenses Travel
-
-# Author@Richard Whittle
-
-# 21/12/2019 
-
-# first draft
-
 '''
-This is the test file for the travel espenses algorythm. This tests the 
-following functions
+ Test Expenses Travel
+ Author@Richard Whittle
+ 21/12/2019 
+ first draft
+
+This is the test file for the travel expenses algorythm. This tests the 
+travel calculations functions
 '''
 
-#from current_income_expenses import *
-from calculate_expenses import * # car_travel_per_trip
+from calculate_expenses import car_travel_per_trip
+from calculate_expenses import train_ticket_return
+
 # from expense_calc_inputs import *
 
 # Test Car 
@@ -32,9 +30,11 @@ train_fare_nil = 0
 train_fare_low = 4.75
 train_fare_medium = 10
 train_fare_high = 105.25
+train_fare_alpha = "Fare"
 train_no_trips = 0
 train_trips_weekly = 1
 train_trips_daily = 5
+train_trips_alpha = "Trips"
 
 # Train assertions
 
@@ -42,6 +42,8 @@ assert train_ticket_return(train_fare_nil, train_no_trips) == 0
 assert train_ticket_return(train_fare_low, train_no_trips) == 0
 assert train_ticket_return(train_fare_medium, train_no_trips) == 0
 assert train_ticket_return(train_fare_high, train_no_trips) == 0
+assert train_ticket_return(train_fare_alpha, train_trips_weekly) == 0
+assert train_ticket_return(train_fare_low, train_trips_alpha) == 0
 
 #train Assert daily tests
 

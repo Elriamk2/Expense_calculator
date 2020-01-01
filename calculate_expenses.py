@@ -17,31 +17,52 @@ Create expenses calculator
 def car_travel_per_trip(distance = 0):
     """Calculates the cost of travel based on a 45p / mile Millage allowance"""
     # take the distance input and multiply that by 45p
-    car_allowance = (distance * 45)
-    if distance > 0:
-        weekly_car_allowance = car_allowance / 100
-        print("Your weekly car maintenace allowance is:", weekly_car_allowance)
-    else:
-        print("You have no car milage costs")
-        weekly_car_allowance = 0
-    return weekly_car_allowance
+    while True:
+        try:
+            int(distance)
+        except(TypeError):
+            distance = 0
+            #print("distance TypeError")
+        except(ValueError):
+            distance = 0
+            #print("distance ValueError")
+        else:
+            car_allowance = (distance * 45)
+            if distance > 0:
+                weekly_car_allowance = car_allowance / 100
+                #print("Your weekly car maintenace allowance is:", weekly_car_allowance)
+            else:
+                #print("You have no car milage costs")
+                weekly_car_allowance = 0
+        return weekly_car_allowance
 
 def train_ticket_return(train_ticket_return = 0, train_trips = 0):
     """Calculates the weekly costs of a train ticket """
-    if train_ticket_return == "":
-        print("You have no train expenses")
-        weekly_train_allowance = 0
-    elif train_ticket_return == 0:
-        print("You have no train expenses")
-        weekly_train_allowance = 0
-    elif train_ticket_return > 0:
-        weekly_train_allowance = (train_ticket_return * train_trips)
-        print("Your weekly train ticket costs are:", weekly_train_allowance)
-    else:
-        print("You have no train expenses")
-        weekly_train_allowance = 0
-        weekly_train_allowance = train_ticket_return
-    return weekly_train_allowance
+    while True:
+        try:
+            int(train_ticket_return)
+            int(train_trips)
+        except(TypeError):
+            weekly_train_allowance = 0
+            #print("Train TypeError")
+        except(ValueError):
+            weekly_train_allowance = 0
+            #print("Train ValueError")
+        else:
+            if train_ticket_return == "":
+            #    print("You have no train expenses")
+                weekly_train_allowance = 0
+            elif train_ticket_return == 0:
+            #    print("You have no train expenses")
+                weekly_train_allowance = 0
+            elif train_ticket_return > 0:
+                weekly_train_allowance = (train_ticket_return * train_trips)
+            #    print("Your weekly train ticket costs are:", weekly_train_allowance)
+            else:
+            #    print("You have no train expenses")
+                weekly_train_allowance = 0
+                weekly_train_allowance = train_ticket_return
+        return weekly_train_allowance
 
 # Housing costs
 def housing_payments(housing_payments = 0):

@@ -1,3 +1,9 @@
+'''
+updated 01/01/2020
+Created Dict Not Found function
+@author: Richard Whittle
+'''
+
 def get_something(key, dictionary):
     '''This is a dictionary used to test int value key return not found'''
     # key = str(key)
@@ -19,5 +25,5 @@ def get_something(key, dictionary):
 #        print("Final case hit")
 
 
-a_dict = {1 : "Definition 1", 2 : "Definition 2", 3 : "Definition 3"}
+# test function a_dict = {1 : "Definition 1", 2 : "Definition 2", 3 : "Definition 3"}
 

@@ -46,14 +46,24 @@ def personal_tax_allowance(wages):
 
 def national_insurance(wages):
     '''Calculates and returns your national insurance payments '''
-    if wages < 8632:
-        national_insurance_rate = 0   
-    elif wages < 41444: # calculats basic NI
-        national_insurance_rate = (wages - 8632) * 0.12
-    elif wages >= 41444: # Caclulates higher NI + full Basic NI ## full basic calc1 is 6000?
-        national_insurance_rate = ((wages - 41444) * 0.02) + 3973
-    print("national insurance is", national_insurance_rate)
-    return national_insurance_rate
+    while True:
+        try:
+            int(wages)
+        except(ValueError):
+            national_insurance_rate = 0
+            #print("National Inurance Value Error ")
+        except(TypeError):
+            national_insurance_rate = 0
+            print("National Inurance Tyoe Error ")
+        else:
+            if wages < 8632:
+                national_insurance_rate = 0   
+            elif wages < 41444: # calculats basic NI
+                national_insurance_rate = (wages - 8632) * 0.12
+            elif wages >= 41444: # Caclulates higher NI + full Basic NI ## full basic calc1 is 6000?
+                national_insurance_rate = ((wages - 41444) * 0.02) + 3973
+            print("national insurance is", national_insurance_rate)
+        return round(national_insurance_rate / 52.090714, 2)
 
 def yearly_wages_uk_other(wages):
     """This calulates your wages based on you living in the UK and outside of Scotland """  
@@ -82,7 +92,7 @@ def yearly_wages_uk_other(wages):
         taxes = full_basic + full_higher + (wages - tax_bands[3] * 0.41) + national_insurance_rate
         after_tax_salary = wages - taxes
     weekly_wages = round((after_tax_salary / 52.090714))
-    return weekly_wages
+    return (wages, taxes, after_tax_salary, weekly_wages)
   
 def yearly_wages_scot(wages):
     """This calculates your wages based on you living in Scotland """  
@@ -139,8 +149,10 @@ def yearly_wages_scot(wages):
     print("your salary is", wages)
     print("Your taxes are:", taxes)
     print("your after tax salery is calculated on", after_tax_salary)
-    return weekly_wages
-    
+    return (wages, taxes, after_tax_salary, weekly_wages)
+
+#purge the following as it should no longer be needed
+'''    
 def yearly_wages(wages):
     """This calculates with the default outside of scotland tax bands """     
     print("calculating UK other than scottish taxes") 
@@ -161,3 +173,4 @@ def yearly_wages(wages):
         after_tax_salary = wages - wagesnational_insurance_rate   
     weekly_wages = round((after_tax_salary / 52.090714))
     return weekly_wages
+'''
