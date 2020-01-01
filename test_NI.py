@@ -17,5 +17,5 @@ ni_high = 60000
 assert national_insurance(ni_alpha) == 0
 assert national_insurance(ni_blank) == 0
 assert national_insurance(ni_low) == 0
-assert national_insurance(ni_medium) == 14.67
-assert national_insurance (ni_high) == 83.4
+assert national_insurance(ni_medium) == 15
+assert national_insurance (ni_high) == 83

@@ -54,7 +54,7 @@ def national_insurance(wages):
             #print("National Inurance Value Error ")
         except(TypeError):
             national_insurance_rate = 0
-            print("National Inurance Tyoe Error ")
+            print("National Inurance Type Error ")
         else:
             if wages < 8632:
                 national_insurance_rate = 0   
@@ -62,8 +62,8 @@ def national_insurance(wages):
                 national_insurance_rate = (wages - 8632) * 0.12
             elif wages >= 41444: # Caclulates higher NI + full Basic NI ## full basic calc1 is 6000?
                 national_insurance_rate = ((wages - 41444) * 0.02) + 3973
-            print("national insurance is", national_insurance_rate)
-        return round(national_insurance_rate / 52.090714, 2)
+            # print("national insurance is", national_insurance_rate)
+        return round(national_insurance_rate / 52.090714)
 
 def yearly_wages_uk_other(wages):
     """This calulates your wages based on you living in the UK and outside of Scotland """  
