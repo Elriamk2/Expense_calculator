@@ -19,7 +19,7 @@ def get_something(key, dictionary):
         if key in dictionary:
             read_dict = dictionary[key]
             print(read_dict)
-        elif not key in a_dict == True:
+        elif not key in dictionary == True:
             print("not found")           
 #    finally:
 #        print("Final case hit")
