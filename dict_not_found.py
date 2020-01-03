@@ -9,7 +9,7 @@ def get_something(key, dictionary):
     # key = str(key)
     try:
         if not type(key) is int:
-            raise TypeError ("only integers are allowed, you used") # key == type(int)
+            raise TypeError ("only integers are allowed, you used a ", type(key)) 
         #print(type(key))
     except TypeError as N:
         print(N)
@@ -19,11 +19,13 @@ def get_something(key, dictionary):
         if key in dictionary:
             read_dict = dictionary[key]
             print(read_dict)
-        elif not key in a_dict == True:
+        elif not key in dictionary == True:
             print("not found")           
 #    finally:
 #        print("Final case hit")
 
 
-# test function a_dict = {1 : "Definition 1", 2 : "Definition 2", 3 : "Definition 3"}
+# test function
+a_dict = {1 : "Definition 1", 2 : "Definition 2", 3 : "Definition 3"}
+
 
