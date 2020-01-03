@@ -9,10 +9,10 @@ def get_something(key, dictionary):
     # key = str(key)
     try:
         if not type(key) is int:
-            raise TypeError ("only integers are allowed, you used a ", type(key)) 
+            raise TypeError ("only integers are allowed, you used a") 
         #print(type(key))
     except TypeError as N:
-        print(N)
+        print(N , type(key))
     except Exception as e:
            print(type(key) + e)
     else:
