@@ -6,7 +6,6 @@ Create expenses calculator
 
 import sys
 import re
-#import test_exp_travel
 from current_income_expenses import *
 
 # calculating the costs of commuting  and living away from home
@@ -56,12 +55,10 @@ def national_insurance(wages = 0):
     while True:
         try:
             wages = int(wages)
-        except(ValueError):
+        except(ValueError, TypeError):
             national_insurance_rate = 0
+            wages = 0
             # print("National Inurance Value Error ")
-        except(TypeError):
-            national_insurance_rate = 0
-            print("National Inurance Type Error ")
         finally:
             if wages < 8632:
                 national_insurance_rate = 0   
@@ -70,7 +67,7 @@ def national_insurance(wages = 0):
             elif wages >= 41444: # Caclulates higher NI + full Basic NI ## full basic calc1 is 6000?
                 national_insurance_rate = ((wages - 41444) * 0.02) + 3973
             # print("national insurance is", national_insurance_rate)
-        return round(national_insurance_rate / 52.090714)
+        return(national_insurance_rate, round(national_insurance_rate / 52.090714))
 
 def yearly_wages_uk_other(wages = 0):
     """This calulates your wages based on you living in the UK and outside of Scotland """  
@@ -79,31 +76,34 @@ def yearly_wages_uk_other(wages = 0):
             wages = int(wages)
         except(ValueError):
             wages = 0
+            taxes = 0
+            after_tax_salary = 0
+            weekly_wages = 0
         else:
             print("calculating UK other than scottish taxes") 
             national_insurance_rate = national_insurance(wages)
             # return print("Your salary  sacrifice if over 100,000 is, otherwise your wages are", personal_tax_allowance(wages))
             tax_bands = [8632, 12500, 50000, 150000]
 
-            full_basic = (tax_bands[1] * 0.2) # basic rate at 20 % tax
-            full_higher = (tax_bands[2] * 0.4) # higher rate at 40 % tax
-            full_top = (tax_bands[3] * 0.41) # higher rate at 41 % allowance decreases
+            full_basic = wages - (tax_bands[1] * 0.2) # basic rate at 20 % tax
+            full_higher = wages - (tax_bands[2] * 0.4) # higher rate at 40 % tax
+            full_top = wages - (tax_bands[3] * 0.41) # higher rate at 41 % allowance decreases
 
 
             if wages < tax_bands[0]: 
-                taxes = national_insurance_rate
+                taxes = national_insurance_rate[0]
                 after_tax_salary = wages
             elif wages < tax_bands[1]: # Only pay National Insurance
-                taxes = national_insurance_rate
-                after_tax_salary = wages - national_insurance_rate
+                taxes = national_insurance_rate[0]
+                after_tax_salary = wages - taxes
             elif wages < tax_bands[2]: # Only pay basic rate at 20%
-                taxes = (wages - tax_bands[1]) * 0.2 + national_insurance_rate
+                taxes = (wages - tax_bands[1]) * 0.2 + national_insurance_rate[0]
                 after_tax_salary = wages - taxes
             elif wages < tax_bands[3]: # Only pay intermediate rate at 40%
-                taxes = full_basic + ((wages - tax_bands[2]) * 0.4) + national_insurance_rate
+                taxes = full_basic + ((wages - tax_bands[2]) * 0.4) + national_insurance_rate[0]
                 after_tax_salary = wages - taxes 
             elif wages >= tax_bands[3]: # Pay top rate tax
-                taxes = full_basic + full_higher + (wages - tax_bands[3] * 0.41) + national_insurance_rate
+                taxes = full_basic + full_higher + (wages - tax_bands[3] * 0.41) + national_insurance_rate[0]
                 after_tax_salary = wages - taxes
             weekly_wages = round((after_tax_salary / 52.090714))
             taxes = round(wages - after_tax_salary, 2)
@@ -116,6 +116,9 @@ def yearly_wages_scot(wages):
             wages = int(wages)
         except(ValueError):
             wages = 0
+            taxes = 0
+            after_tax_salary = 0
+            weekly_wages = 0
         else:
 
             national_insurance_rate = national_insurance(wages)
@@ -135,34 +138,34 @@ def yearly_wages_scot(wages):
             full_higher = (scottish_tax_bands[4] * 41) / 100 #    print("Full higher rate is",full_higher)
 
             if wages < scottish_tax_bands[0]: 
-                taxes = national_insurance_rate
+                taxes = national_insurance_rate[0]
                 after_tax_salary = wages
 
             elif wages < scottish_tax_bands[1]: # only pay NI       
-                taxes = national_insurance_rate
+                taxes = national_insurance_rate[0]
                 after_tax_salary = wages - national_insurance_rate
 
             elif wages < scottish_tax_bands[2]: # only pay starter rate
-                taxes = national_insurance_rate
+                taxes = national_insurance_rate[0]
                 after_tax_salary = starter_wages - taxes
 
             elif wages < scottish_tax_bands[3]: # paying basic rate
-                taxes = full_starter + national_insurance_rate
+                taxes = full_starter + national_insurance_rate[0]
                 after_tax_salary = intermediate_wages - taxes
 
             elif wages < scottish_tax_bands[4]: # paying intermediate rates
-                taxes = full_starter + full_basic + national_insurance_rate
+                taxes = full_starter + full_basic + national_insurance_rate[0]
                 after_tax_salary = intermediate_wages - taxes
 
             elif wages < scottish_tax_bands[5]: # paying higher rate
-                taxes = national_insurance(wages) + full_basic + full_intermediate + national_insurance_rate
+                taxes = national_insurance(wages) + full_basic + full_intermediate + national_insurance_rate[0]
                 after_tax_salary = higher_wages - taxes
 
             elif wages > scottish_tax_bands[5]: # paying top rate
-                taxes = full_starter + full_basic + full_intermediate + full_higher + national_insurance_rate
+                taxes = full_starter + full_basic + full_intermediate + full_higher + national_insurance_rate[0]
                 after_tax_salary = top_wages - taxes
 
-            weekly_wages = round(after_tax_salary / 52)
+            weekly_wages = round(after_tax_salary / 52.090714)
             taxes = round(wages - after_tax_salary, 2)
           #  print("your salary is", wages)
          #   print("Your taxes are:", taxes)
