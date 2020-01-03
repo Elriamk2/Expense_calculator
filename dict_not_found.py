@@ -16,7 +16,7 @@ def get_something(key, dictionary):
     except Exception as e:
            print(type(key) + e)
     else:
-        if key in a_dict:
+        if key in dictionary:
             read_dict = dictionary[key]
             print(read_dict)
         elif not key in a_dict == True:

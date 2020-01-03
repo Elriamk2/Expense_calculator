@@ -19,12 +19,12 @@ def car_travel_per_trip(distance = 0):
     # take the distance input and multiply that by 45p
     while True:
         try:
-            int(distance)
+            distance = int(distance)
         except(TypeError):
-            distance = 0
+            weekly_car_allowance = 0
             #print("distance TypeError")
         except(ValueError):
-            distance = 0
+            weekly_car_allowance = 0
             #print("distance ValueError")
         else:
             car_allowance = (distance * 45)
@@ -40,8 +40,8 @@ def train_ticket_return(train_ticket_return = 0, train_trips = 0):
     """Calculates the weekly costs of a train ticket """
     while True:
         try:
-            int(train_ticket_return)
-            int(train_trips)
+            train_ticket_return = float(train_ticket_return)
+            train_trips = float(train_trips)
         except(TypeError):
             weekly_train_allowance = 0
             #print("Train TypeError")
@@ -69,8 +69,7 @@ def housing_payments(housing_payments = 0):
     """Calculates the weekly and yearly monthly payments based on the monthly costs""" 
     while True:
         try:
-            check = housing_payments
-            check = float(housing_payments)
+            housing_payments = float(housing_payments)
         except (TypeError, ValueError):
             weekly_housing_costs = 0
             #print("invalid value used, housing costs calculated as 0")
@@ -82,7 +81,7 @@ def housing_payments(housing_payments = 0):
                 #print("You have no housing expenses")
                 weekly_housing_costs = 0
         #print("Your weekly housing costs are", weekly_housing_costs) Handle this in the input file outputs?
-        return weekly_housing_costs
+        return(weekly_housing_costs, round(weekly_housing_costs, 2))
 
 def council_tax_band(council_tax_band = 0):
     """Calculates your council tax based on the  """
@@ -115,7 +114,7 @@ def council_tax_band(council_tax_band = 0):
             else:
                 weekly_council_tax = 3911.36 / 52.090714
 #    calculations_list[6] = council_tax_band
-        return round(weekly_council_tax, 2)
+        return (weekly_council_tax, round(weekly_council_tax, 2))
     #print("Your weekly council tax payments at band", council_tax_calc, " are", weekly_council_tax)
     #Handle Outputs elsewhere
 
@@ -123,7 +122,7 @@ def monthly_electricity_bill(electric_bill = 0):
     """Calculates the weekly costs of your electric bills based in £ based on a 4.45 week cycle"""
     while True:
         try:
-            float(electric_bill)
+            electric_bill = float(electric_bill)
         except (ValueError, TypeError):
             weekly_electric_bill = 0
             #print("typeError encountered")
@@ -137,14 +136,14 @@ def monthly_electricity_bill(electric_bill = 0):
             else:
                 electric_bill = 0
         #print("You have entered an invalid figure")
-                weekly_electric_bill = electric_bill
-        return round(weekly_electric_bill, 2)
+                weekly_electric_bill = float(electric_bill, 2)
+        return(weekly_electric_bill, round(weekly_electric_bill, 2))
 
 def monthly_gas_bill(gas = 0):
     '''Calculate your weekly Gas bills in £ based on 4.45 week per month'''
     while True:
         try:
-            float(gas)
+            gas = float(gas)
         except (ValueError, TypeError):
             gas_bill = 0
             #print("Gas TypeError")
@@ -155,13 +154,14 @@ def monthly_gas_bill(gas = 0):
                 gas_bill = gas /4.45
             else:
                 gas_bill = 0
-        return round(gas_bill, 2)
+            gas_bill = float(gas_bill, 2)
+        return(gas_bill, round(gas_bill, 2))
 
 def monthly_telephony_bill(telephony = 0):
     """Calculates the costs of you telephone bills in £ based on a 4.45 week cycle"""
     while True:
         try:
-            float(telephony)
+            telephony = float(telephony)
         except (ValueError, TypeError):
             telephony_bill = 0
             #print("typeError Telephony encountered")
@@ -174,5 +174,5 @@ def monthly_telephony_bill(telephony = 0):
             else:
                 telephony_bill = 0
                 #print("Telephony, you have entered 0")
-                #telephony_bill = telephony
+        telephony = float(telephony)
         return round(telephony_bill, 2)
