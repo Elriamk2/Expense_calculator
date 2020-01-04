@@ -7,15 +7,15 @@ Author @ Richard Whittle
 from current_income_expenses import national_insurance
 
 # create national insurance test statements
-ni_alpha = "National Insurance"
-ni_blank = ""
-ni_low = 5000
-ni_medium = 15000
-ni_high = 60000
+ni_alpha = national_insurance("National Insurance")
+ni_blank = national_insurance("")
+ni_low = national_insurance(5000)
+ni_medium = national_insurance(15000)
+ni_high = national_insurance(60000)
 
 # Create national insurance asserts
-assert national_insurance(ni_alpha) == 0
-assert national_insurance(ni_blank) == 0
-assert national_insurance(ni_low) == 0
-assert national_insurance(ni_medium) == 15
-assert national_insurance (ni_high) == 83
+assert ni_alpha[1] == 0
+assert ni_blank[1] == 0
+assert ni_low[1] == 0
+assert ni_medium[1] == 15
+assert ni_high[1] == 83

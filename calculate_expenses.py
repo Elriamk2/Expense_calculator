@@ -111,8 +111,10 @@ def council_tax_band(council_tax_band = 0):
                 weekly_council_tax = 2646.65 / 52.090714
             elif council_tax_calc.upper() == "G":
                 weekly_council_tax = 3,156.65 / 52.090714
-            else:
+            elif council_tax_calc.upper() == "H":
                 weekly_council_tax = 3911.36 / 52.090714
+            else:
+                weekly_council_tax = 0
 #    calculations_list[6] = council_tax_band
         return (weekly_council_tax, round(weekly_council_tax, 2))
     #print("Your weekly council tax payments at band", council_tax_calc, " are", weekly_council_tax)
@@ -136,7 +138,7 @@ def monthly_electricity_bill(electric_bill = 0):
             else:
                 electric_bill = 0
         #print("You have entered an invalid figure")
-                weekly_electric_bill = float(electric_bill, 2)
+                weekly_electric_bill = electric_bill
         return(weekly_electric_bill, round(weekly_electric_bill, 2))
 
 def monthly_gas_bill(gas = 0):
@@ -154,7 +156,6 @@ def monthly_gas_bill(gas = 0):
                 gas_bill = gas /4.45
             else:
                 gas_bill = 0
-            gas_bill = float(gas_bill, 2)
         return(gas_bill, round(gas_bill, 2))
 
 def monthly_telephony_bill(telephony = 0):

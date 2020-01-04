@@ -80,32 +80,31 @@ def yearly_wages_uk_other(wages = 0):
             after_tax_salary = 0
             weekly_wages = 0
         else:
-            print("calculating UK other than scottish taxes") 
+            # print("calculating UK other than scottish taxes") 
             national_insurance_rate = national_insurance(wages)
             # return print("Your salary  sacrifice if over 100,000 is, otherwise your wages are", personal_tax_allowance(wages))
             tax_bands = [8632, 12500, 50000, 150000]
 
-            full_basic = wages - (tax_bands[1] * 0.2) # basic rate at 20 % tax
-            full_higher = wages - (tax_bands[2] * 0.4) # higher rate at 40 % tax
-            full_top = wages - (tax_bands[3] * 0.41) # higher rate at 41 % allowance decreases
-
-
-            if wages < tax_bands[0]: 
+            full_basic = (tax_bands[1] * 0.2) # basic rate at 20 % tax
+            full_higher = (tax_bands[2] - tax_bands[1]) * 0.4 # higher rate at 40 % tax
+            
+            if wages <= tax_bands[0]: # Only pay National Insurance
                 taxes = national_insurance_rate[0]
                 after_tax_salary = wages
-            elif wages < tax_bands[1]: # Only pay National Insurance
+            elif wages <= tax_bands[1]: # Only pay National Insurance
                 taxes = national_insurance_rate[0]
                 after_tax_salary = wages - taxes
-            elif wages < tax_bands[2]: # Only pay basic rate at 20%
-                taxes = (wages - tax_bands[1]) * 0.2 + national_insurance_rate[0]
+            elif wages <= tax_bands[2]: # Only pay basic rate at 20%
+                taxes = ((wages - tax_bands[1]) * 0.2) + national_insurance_rate[0]
                 after_tax_salary = wages - taxes
             elif wages < tax_bands[3]: # Only pay intermediate rate at 40%
-                taxes = full_basic + ((wages - tax_bands[2]) * 0.4) + national_insurance_rate[0]
-                after_tax_salary = wages - taxes 
-            elif wages >= tax_bands[3]: # Pay top rate tax
-                taxes = full_basic + full_higher + (wages - tax_bands[3] * 0.41) + national_insurance_rate[0]
+                taxes = full_basic #+ ((wages - tax_bands[2]) * 0.4) + national_insurance_rate[0]
                 after_tax_salary = wages - taxes
-            weekly_wages = round((after_tax_salary / 52.090714))
+            elif wages >= tax_bands[3]: # pay additional rate at 45%
+                #taxes = full_basic + full_higher + additional_rate + national_insurance_rate[0]
+                taxes = (tax_bands[1] * 0.2) + ((tax_bands[2] - tax_bands[1]) * 0.4) + ((wages - tax_bands[3]) * 45) + national_insurance_rate[0]
+                after_tax_salary = wages - taxes
+            weekly_wages = round((after_tax_salary / 52)) #.090714
             taxes = round(wages - after_tax_salary, 2)
         return (wages, taxes, after_tax_salary, weekly_wages)
   
@@ -143,7 +142,7 @@ def yearly_wages_scot(wages):
 
             elif wages < scottish_tax_bands[1]: # only pay NI       
                 taxes = national_insurance_rate[0]
-                after_tax_salary = wages - national_insurance_rate
+                after_tax_salary = wages - taxes
 
             elif wages < scottish_tax_bands[2]: # only pay starter rate
                 taxes = national_insurance_rate[0]
@@ -158,14 +157,14 @@ def yearly_wages_scot(wages):
                 after_tax_salary = intermediate_wages - taxes
 
             elif wages < scottish_tax_bands[5]: # paying higher rate
-                taxes = national_insurance(wages) + full_basic + full_intermediate + national_insurance_rate[0]
+                taxes = full_basic + full_intermediate + national_insurance_rate[0]
                 after_tax_salary = higher_wages - taxes
 
             elif wages > scottish_tax_bands[5]: # paying top rate
                 taxes = full_starter + full_basic + full_intermediate + full_higher + national_insurance_rate[0]
                 after_tax_salary = top_wages - taxes
 
-            weekly_wages = round(after_tax_salary / 52.090714)
+            weekly_wages = round(after_tax_salary / 52) # for full year it would be an additional .090714
             taxes = round(wages - after_tax_salary, 2)
           #  print("your salary is", wages)
          #   print("Your taxes are:", taxes)
