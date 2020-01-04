@@ -29,3 +29,6 @@ Breaking unit tests out to function sepecific files
 
 To be done:
 * amend the outputs to be handled elsewhere so the caclulations no longer generate spurius text whilst doing unit tests.
+
+2020 01 04
+Branch stable and passing tests, closed 3 suggestions on project board, outstanding issues to be resolved include high end calculations for taxes, otherwise calculations are good.
