@@ -18,6 +18,10 @@
  * Clean up expenses_calc to use returns rather than globals
  * Impliment new import methods rather than using input to update the raw files
 
+05/12/2019
+
+Created stable branch as base functions are working with an error in the higher end calculations leading to a difference of 10's of pounds in higher end values. However as this is not really for reelase and is mainly to test my development and maintenance for python I feel it is an acceptable bug. This will be reviewed later.
+
 2019 12 29
 
 Uodated error handling in the unit tests, 
