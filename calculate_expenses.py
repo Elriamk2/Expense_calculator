@@ -175,5 +175,4 @@ def monthly_telephony_bill(telephony = 0):
             else:
                 telephony_bill = 0
                 #print("Telephony, you have entered 0")
-        telephony = float(telephony)
         return round(telephony_bill, 2)
