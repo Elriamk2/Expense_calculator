@@ -6,7 +6,14 @@ Create expenses calculator
 
 import sys
 import re
-from current_income_expenses import *
+#from current_income_expenses import *
+
+class national_insurance:
+    def __init__(self, gross_pay):
+        self.gross_pay = gross_pay
+
+    def __repr__(self):
+        return f({self.gross_pay})
 
 # calculating the costs of commuting  and living away from home
 
@@ -97,12 +104,12 @@ def yearly_wages_uk_other(wages = 0):
             elif wages <= tax_bands[2]: # Only pay basic rate at 20%
                 taxes = ((wages - tax_bands[1]) * 0.2) + national_insurance_rate[0]
                 after_tax_salary = wages - taxes
-            elif wages < tax_bands[3]: # Only pay intermediate rate at 40%
-                taxes = full_basic #+ ((wages - tax_bands[2]) * 0.4) + national_insurance_rate[0]
+            elif wages <= tax_bands[3]: # Only pay intermediate rate at 40%
+                taxes = full_basic + ((wages - tax_bands[2]) * 0.4) + national_insurance_rate[0]
                 after_tax_salary = wages - taxes
             elif wages >= tax_bands[3]: # pay additional rate at 45%
                 #taxes = full_basic + full_higher + additional_rate + national_insurance_rate[0]
-                taxes = (tax_bands[1] * 0.2) + ((tax_bands[2] - tax_bands[1]) * 0.4) + ((wages - tax_bands[3]) * 45) + national_insurance_rate[0]
+                taxes = full_basic + full_higher + ((wages - tax_bands[3]) * .45) + national_insurance_rate[0]
                 after_tax_salary = wages - taxes
             weekly_wages = round((after_tax_salary / 52)) #.090714
             taxes = round(wages - after_tax_salary, 2)
@@ -126,15 +133,15 @@ def yearly_wages_scot(wages):
             scottish_tax_bands = [8632, 12500, 14549, 24944, 43430, 150000]
 
             starter_wages = wages - (scottish_tax_bands[1] * 0.19)
-            basic_wages = wages - ((scottish_tax_bands[2] * 20) / 100)
-            intermediate_wages = wages - ((scottish_tax_bands[3] * 21) /100)
-            higher_wages = wages - ((scottish_tax_bands[4] * 41) / 100)
-            top_wages = wages - ((scottish_tax_bands[5] * 46) / 100)
+            basic_wages = wages - (scottish_tax_bands[2] * 0.2)
+            intermediate_wages = wages - (scottish_tax_bands[3] * 0.21)
+            higher_wages = wages - (scottish_tax_bands[4] * 0.41 / 100)
+            top_wages = wages - (scottish_tax_bands[5] * 0.46)
 
-            full_starter = (scottish_tax_bands[1] * 19) / 100 #    print("Full starter rate is", full_starter)
-            full_basic = (scottish_tax_bands[2] * 20) / 100 #    print("Full basic rate is", full_basic)
-            full_intermediate = (scottish_tax_bands[3] * 21) /100 #    print("Full intermediate rate is", full_intermediate)
-            full_higher = (scottish_tax_bands[4] * 41) / 100 #    print("Full higher rate is",full_higher)
+            full_starter = scottish_tax_bands[1] * 0.19 #    print("Full starter rate is", full_starter)
+            full_basic = scottish_tax_bands[2] * 0.2 #    print("Full basic rate is", full_basic)
+            full_intermediate = scottish_tax_bands[3] * 0.21 #    print("Full intermediate rate is", full_intermediate)
+            full_higher = scottish_tax_bands[4] * 0.41 #    print("Full higher rate is",full_higher)
 
             if wages < scottish_tax_bands[0]: 
                 taxes = national_insurance_rate[0]
