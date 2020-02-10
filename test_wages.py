@@ -7,14 +7,14 @@ def test_wages_uk_other():
     wages_uk_base = yearly_wages_uk_other(10000)
     wages_uk_low = yearly_wages_uk_other(12500)
     wages_uk_medium = yearly_wages_uk_other(24550)
-    #wages_uk_high = yearly_wages_uk_other(275000)
+    wages_uk_high = yearly_wages_uk_other(275000)
     wages_uk_string = yearly_wages_uk_other("uk wages string")
     wages_uk_empty =  yearly_wages_uk_other("")
     
     assert wages_uk_base[3] == 189
     assert wages_uk_low[3] == 231
     assert wages_uk_medium[3] == 389
-   # assert wages_uk_high[3] == 3015
+    #assert wages_uk_high[3] == 3015
     assert wages_uk_string[3] == 0
     assert wages_uk_empty[3] == 0
 #    assert yearly_wages_uk_other(43431) == weekly_wages # Still showing a difference of a few pounds here, unsure where the error is creeping in
@@ -30,8 +30,8 @@ def test_wages_scot():
     wages_scot_empty = yearly_wages_scot("")
 
     assert wages_scot_base[3] == 189
-#    assert wages_scot_medium[3] == 692
-    #assert wages_scot_high[3] == 1633
+    assert wages_scot_medium[3] == 692
+    assert wages_scot_high[3] == 1633
     assert wages_scot_string[3] == 0
     assert wages_scot_empty[3] == 0
 

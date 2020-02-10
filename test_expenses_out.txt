@@ -20,3 +20,101 @@ Weekly take home pay after taxes and National Insurance is roughly: 514.01
 Monthly earnings after tax and expenses is roughly: 2235.94
 Yearly earnings after tax and expenses is roughly: 26779.9
 ===== 
+Inputs were: 
+[35000, '300', '1', '', '', 0, 'd', '600', (6.741573033707865, 6.74), '35']The Outputs for this are: 
+[410, 0, 32.21, 0, 150.0, 0, 7.87, 160.91954022988506, 0]
+ ===== 
+The weekly telephony payments are: 7.87
+Yearly earnings after tax and expenses is roughly: 19841.74
+Weekly take home pay after taxes and National Insurance is roughly: 380.84
+Monthly earnings after tax and expenses is roughly: 1656.65
+Yearly earnings after tax and expenses is roughly: 19841.74
+
+ ===== 
+Differential in expenses if in Glasgow
+ =====
+
+
+Inputs were: 
+[0, '1', '162', '1', '5', '1.80', 'c', '200', (7.865168539325842, 7.87), '96'] 
+ The Outputs for this are: 
+[
+Wages 0,
+Car 72.9, 
+council tax 28.64, 
+train costs
+9.0, 
+mortgage 50.0, 
+Electricity 7.87
+weekly Telephony 21.57, 
+extra income
+0.0, 
+gas 7.87]
+ ===== 
+The weekly telephony payments are: 21.57
+Yearly earnings after tax and expenses is roughly: -9487.93
+Weekly take home pay after taxes and National Insurance is roughly: -182.11
+Monthly earnings after tax and expenses is roughly: -792.18
+Yearly earnings after tax and expenses is roughly: -9487.93
+
+ ===== 
+Inputs were: 
+[0, 0, '32', '5', '0', '0', 'e', '500', (13.48314606741573, 13.48), '50'] 
+ The Outputs for this are: 
+[332, 72.0, 41.54, 0, 125.0, 0, 11.24, 160.91954022988506, 0]
+ ===== 
+The weekly telephony payments are: 11.24
+Yearly earnings after tax and expenses is roughly: 12667.57
+Weekly take home pay after taxes and National Insurance is roughly: 243.14
+Monthly earnings after tax and expenses is roughly: 1057.66
+Yearly earnings after tax and expenses is roughly: 12667.57
+
+ ===== 
+Inputs were: 
+[0, 0, 0, 0, 0, 0, 'e', '600', (13.48314606741573, 13.48), '50'] 
+ The Outputs for this are: 
+[332, 72.0, 41.54, 0, 150.0, 0, 11.24, 0.0, 0]
+ ===== 
+The weekly telephony payments are: 11.24
+Yearly earnings after tax and expenses is roughly: 2981.16
+Weekly take home pay after taxes and National Insurance is roughly: 57.22
+Monthly earnings after tax and expenses is roughly: 248.91
+Yearly earnings after tax and expenses is roughly: 2981.16
+
+ ===== 
+Inputs were: 
+[0, 0, 0, 0, 0, 0, 'e', '600', (13.48314606741573, 13.48), '50'] 
+ The Outputs for this are: 
+[332, 72.0, 41.54, 0, 150.0, 0, 11.24, 160.91954022988506, 0]
+ ===== 
+The weekly telephony payments are: 11.24
+Yearly earnings after tax and expenses is roughly: 11365.07
+Weekly take home pay after taxes and National Insurance is roughly: 218.14
+Monthly earnings after tax and expenses is roughly: 948.91
+Yearly earnings after tax and expenses is roughly: 11365.07
+
+ ===== 
+Inputs were: 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+ The Outputs for this are: 
+[359, 85.5, 25.06, 48.0, 112.5, 0, 11.24, 0.0, 0]
+ ===== 
+The weekly telephony payments are: 11.24
+Yearly earnings after tax and expenses is roughly: 3996.07
+Weekly take home pay after taxes and National Insurance is roughly: 76.7
+Monthly earnings after tax and expenses is roughly: 333.64
+Yearly earnings after tax and expenses is roughly: 3996.07
+
+ ===== 
+Inputs were: 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+ The Outputs for this are: 
+[410, 72.0, 41.54, 0.0, 125.0, 0, 1.12, 0.0, 0]
+ ===== 
+The weekly telephony payments are: 1.12
+Yearly earnings after tax and expenses is roughly: 8874.71
+Weekly take home pay after taxes and National Insurance is roughly: 170.34
+Monthly earnings after tax and expenses is roughly: 740.98
+Yearly earnings after tax and expenses is roughly: 8874.71
+
+ ===== 

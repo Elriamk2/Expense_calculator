@@ -115,7 +115,7 @@ def yearly_wages_uk_other(wages = 0):
             taxes = round(wages - after_tax_salary, 2)
         return (wages, taxes, after_tax_salary, weekly_wages)
   
-def yearly_wages_scot(wages):
+def yearly_wages_scot(wages = 0):
     """This calculates your wages based on you living in Scotland """  
     while True:
         try:
@@ -173,7 +173,14 @@ def yearly_wages_scot(wages):
 
             weekly_wages = round(after_tax_salary / 52) # for full year it would be an additional .090714
             taxes = round(wages - after_tax_salary, 2)
-          #  print("your salary is", wages)
-         #   print("Your taxes are:", taxes)
-        #    print("your after tax salery is calculated on", after_tax_salary)
         return (wages, taxes, after_tax_salary, weekly_wages)
+
+def additional_income(other):
+    "This calculates your additional income streams"
+    while True:
+        try:
+            extra_income = float(other) / 4.35
+        except (TypeError, ValueError):
+            extra_income = float(0)
+        return extra_income
+            

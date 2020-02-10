@@ -19,7 +19,7 @@ def car_travel_per_trip(distance = 0):
     # take the distance input and multiply that by 45p
     while True:
         try:
-            distance = int(distance)
+            distance = float(distance)
         except(TypeError):
             weekly_car_allowance = 0
             #print("distance TypeError")
@@ -27,9 +27,9 @@ def car_travel_per_trip(distance = 0):
             weekly_car_allowance = 0
             #print("distance ValueError")
         else:
-            car_allowance = (distance * 45)
+            car_allowance = (distance * 0.45)
             if distance > 0:
-                weekly_car_allowance = car_allowance / 100
+                weekly_car_allowance = car_allowance
                 #print("Your weekly car maintenace allowance is:", weekly_car_allowance)
             else:
                 #print("You have no car milage costs")
