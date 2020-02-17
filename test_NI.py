@@ -12,6 +12,7 @@ ni_blank = national_insurance("")
 ni_low = national_insurance(5000)
 ni_medium = national_insurance(15000)
 ni_high = national_insurance(60000)
+ni_top = national_insurance(160000)
 
 # Create national insurance asserts
 assert ni_alpha[1] == 0
@@ -19,3 +20,4 @@ assert ni_blank[1] == 0
 assert ni_low[1] == 0
 assert ni_medium[1] == 15
 assert ni_high[1] == 83
+assert ni_top == 122

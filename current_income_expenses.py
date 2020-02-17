@@ -6,7 +6,7 @@ Create expenses calculator
 
 import sys
 import re
-#from current_income_expenses import *
+from expense_calc_inputs import *
 
 class national_insurance:
     def __init__(self, gross_pay):
