@@ -7,6 +7,16 @@ Create expenses calculator
 import sys
 import re
 
+# check if running as __main__
+if __name__ == "__main__":
+    gross_pay = 0
+    select_tax_region(input = 0)
+    personal_tax_allowance(wages = 0)
+    national_insurance(wages = 0)
+    yearly_wages_uk_other(wages = 0)
+    yearly_wages_scot(wages = 0)
+    additional_income(other = 0)
+
 class national_insurance:
     def __init__(self, gross_pay):
         self.gross_pay = gross_pay
@@ -181,12 +191,3 @@ def additional_income(other):
             extra_income = float(0)
         return extra_income
             
-# check if running as __main__
-if __name__ == "__main__":
-    gross_pay = 0
-    select_tax_region(input = 0)
-    personal_tax_allowance(wages = 0)
-    national_insurance(wages = 0)
-    yearly_wages_uk_other(wages = 0)
-    yearly_wages_scot(wages = 0)
-    additional_income(other = 0)
