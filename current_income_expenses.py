@@ -8,14 +8,19 @@ import sys
 import re
 
 # check if running as __main__
-if __name__ == "__main__":
+'''
+def main_test(): 
     gross_pay = 0
-    select_tax_region(input = 0)
+    select_tax_region(input = 1)
     personal_tax_allowance(wages = 0)
     national_insurance(wages = 0)
     yearly_wages_uk_other(wages = 0)
     yearly_wages_scot(wages = 0)
     additional_income(other = 0)
+'''
+
+if __name__ == "__main__":
+    quit
 
 class national_insurance:
     def __init__(self, gross_pay):
@@ -190,4 +195,3 @@ def additional_income(other):
         except (TypeError, ValueError):
             extra_income = float(0)
         return extra_income
-            
