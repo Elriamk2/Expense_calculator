@@ -140,7 +140,7 @@ expense_write = open("test_expenses_out.txt", "a")
 expense_write.write
 
 expense_write.write("Inputs were: \n")
-expense_write.write(calculatations_dict_out)
+expense_write.write(calculations_dict_out)
 expense_write.write(" \n The Outputs for this are: \n")
 expense_write.write(session_outs)
 expense_write.write("\n ===== \n")

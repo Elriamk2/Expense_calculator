@@ -118,3 +118,15 @@ Monthly earnings after tax and expenses is roughly: 740.98
 Yearly earnings after tax and expenses is roughly: 8874.71
 
  ===== 
+Inputs were: 
+{'current_wages': 30000, 'select_tax_region': '1', 'car_distance': '90', 'car_trips': '1', 'train_ticket_return': '5', 'train_trips_per_week': '9.0', 'council_tax_assesment': 'c', 'housing_payments': '500', 'monthly_electricity_bill': (13.48314606741573, 13.48), 'monthly_gas_bill': (6.741573033707865, 6.74), 'monthly_telephony_bill': '45'} 
+ The Outputs for this are: 
+[325, 40.5, 28.64, 45.0, 125.0, 0, 10.11, 0.0, 0]
+ ===== 
+The weekly telephony payments are: 10.11
+Yearly earnings after tax and expenses is roughly: 3946.58
+Weekly take home pay after taxes and National Insurance is roughly: 75.75
+Monthly earnings after tax and expenses is roughly: 329.51
+Yearly earnings after tax and expenses is roughly: 3946.58
+
+ ===== 
