@@ -6,7 +6,6 @@ Create expenses calculator
 
 import sys
 import re
-from expense_calc_inputs import *
 
 class national_insurance:
     def __init__(self, gross_pay):
@@ -14,8 +13,6 @@ class national_insurance:
 
     def __repr__(self):
         return f({self.gross_pay})
-
-# calculating the costs of commuting  and living away from home
 
 # calculate the tax region and call the appropriate
 def select_tax_region(input):
@@ -36,7 +33,7 @@ def select_tax_region(input):
         national_insurance(gross_pay)
         yearly_wages_uk_other(gross_pay)
     else:
-        yearly_wages(gross_pay)
+        yearly_wages_uk_other(gross_pay)
 
 # define salary sacrifice conditions and return appropriate starter rates
 def personal_tax_allowance(wages = 0):
@@ -184,3 +181,12 @@ def additional_income(other):
             extra_income = float(0)
         return extra_income
             
+# check if running as __main__
+if __name__ == "__main__":
+    gross_pay = 0
+    select_tax_region(input = 0)
+    personal_tax_allowance(wages = 0)
+    national_insurance(wages = 0)
+    yearly_wages_uk_other(wages = 0)
+    yearly_wages_scot(wages = 0)
+    additional_income(other = 0)
